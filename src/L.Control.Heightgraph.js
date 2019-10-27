@@ -27,10 +27,10 @@ L.Control.Heightgraph = L.Control.extend({
         var opts = this.options;
         var container = this._container = L.DomUtil.create('div', 'heightgraph');
         L.DomEvent.disableClickPropagation(container);
-        var buttonContainer = this._button = L.DomUtil.create('div', "heightgraph-toggle", container);
-        var link = L.DomUtil.create('a', "heightgraph-toggle-icon", buttonContainer);
-        var closeButton = this._closeButton = L.DomUtil.create('a', "heightgraph-close-icon", container);
-        this._showState = false;
+        //var buttonContainer = this._button = L.DomUtil.create('div', "heightgraph-toggle", container);
+        //var link = L.DomUtil.create('a', "heightgraph-toggle-icon", buttonContainer);
+        //var closeButton = this._closeButton = L.DomUtil.create('a', "heightgraph-close-icon", container);
+        this._showState = true;
         this._initToggle();
         this._margin = this.options.margins;
         this._width = this.options.width;
@@ -77,8 +77,8 @@ L.Control.Heightgraph = L.Control.extend({
         } else {
             L.DomEvent.on(this._container, 'click', L.DomEvent.stopPropagation);
         }
-        L.DomEvent.on(this._button, 'click', this._expand, this);
-        L.DomEvent.on(this._closeButton, 'click', this._expand, this);
+        //L.DomEvent.on(this._button, 'click', this._expand, this);
+        //L.DomEvent.on(this._closeButton, 'click', this._expand, this);
     },
     _dragHandler: function() {
         //we don´t want map events to occur here
@@ -161,20 +161,12 @@ L.Control.Heightgraph = L.Control.extend({
      */
     _expand: function() {
         if (!this._showState) {
-            d3.select(this._button)
-                .style("display", "none");
             d3.select(this._container)
                 .selectAll('svg')
-                .style("display", "block");
-            d3.select(this._closeButton)
                 .style("display", "block");
         } else {
-            d3.select(this._button)
-                .style("display", "block");
             d3.select(this._container)
                 .selectAll('svg')
-                .style("display", "none");
-            d3.select(this._closeButton)
                 .style("display", "none");
         }
         this._showState = !this._showState;
@@ -515,7 +507,7 @@ L.Control.Heightgraph = L.Control.extend({
             "x": this._width - this._margin.left - this._margin.right + 7,
             "y": this._y(this._profile.yElevationMin),
             "color": "black",
-            "type": d3.symbolTriangle,
+            "type": "triangle-up",
             "angle": -90,
             "size": 100
         }];
