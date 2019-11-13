@@ -43,6 +43,7 @@
 
 .legend-hover {
     cursor: pointer;
+    font-weight: bold;
 }
 
 .legend-text {
@@ -143,6 +144,9 @@
 
 .select-info {
     cursor: default;
+    font-size: 14px;
+    font-weight: bold;
+    fill: #333;
 }
 
 .lineSelection {

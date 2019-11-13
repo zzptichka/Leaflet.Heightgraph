@@ -62,11 +62,13 @@ L.Control.Heightgraph = L.Control.extend({
                 .remove();
         }
         this._data = data;
+        const selection = this._selectedOption;
         this._selection();
         this._prepareData();
         this._computeStats();
         this._appendScales();
         this._appendGrid();
+        this._selectedOption = selection==undefined ? 0 : selection;
         this._createChart(this._selectedOption);
         if (this._data.length > 1) this._createSelectionBox();
         if (this.options.expand) {this._showState=false;this._expand();}
@@ -252,7 +254,7 @@ L.Control.Heightgraph = L.Control.extend({
             this._profile.blocks[y] = {};
             this._profile.blocks[y].info = {
                 id: y,
-                text: data[y].properties.summary
+                text: data[y].properties.text
             };
             this._profile.blocks[y].distances = [];
             this._profile.blocks[y].attributes = [];
@@ -740,14 +742,14 @@ L.Control.Heightgraph = L.Control.extend({
             height = this._height - this._margin.top - this._margin.bottom;
         var jsonCircles = [{
             "x": width - 50,
-            "y": height + 45,
+            "y": height - 115,
             "color": "#000",
             "type": 'triangle-up',//d3.symbolTriangle,
             "id": "leftArrowSelection",
             "angle": 0
         }, {
             "x": width - 35,
-            "y": height + 45,
+            "y": height - 115,
             "color": "#000",
             "type": 'triangle-down',//d3.symbolTriangle,
             "id": "rightArrowSelection",
@@ -812,7 +814,7 @@ L.Control.Heightgraph = L.Control.extend({
                 .enter()
                 .append('text')
                 .attr("x", width - 20)
-                .attr("y", height + 50)
+                .attr("y", height - 110)
                 .text(function(d) {
                     return d.selection;
                 })
@@ -879,8 +881,8 @@ L.Control.Heightgraph = L.Control.extend({
         legendHover.append('text')
             .attr('class', 'legend-menu')
             .attr("class", "no-select")
-            .attr('x', 15)
-            .attr('y', height + 40)
+            .attr('x', 10)
+            .attr('y', 0)
             .text(function(d, i) {
                 return d.text;
             })
