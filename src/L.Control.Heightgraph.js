@@ -416,6 +416,7 @@ L.Control.Heightgraph = L.Control.extend({
      * Creates the elevation profile
      */
     _createChart: function(idx) {
+        if(this._profile.blocks.length==0){return}
         areas = this._profile.blocks[idx].geometries;
         this._areasFlattended = [].concat.apply([], areas);
         for (var i = 0; i < areas.length; i++) {
@@ -765,7 +766,7 @@ L.Control.Heightgraph = L.Control.extend({
                 .type(function(d) {
                     return d.type;
                 })
-                .size(50))
+                .size(80))
             .attr("transform", function(d) {
                 return "translate(" + d.x + "," + d.y + ") rotate(" + d.angle + ")";
             })
