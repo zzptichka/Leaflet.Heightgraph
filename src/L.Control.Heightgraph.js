@@ -820,7 +820,10 @@ L.Control.Heightgraph = L.Control.extend({
                     return d.selection;
                 })
                 .attr("class", "select-info")
-                .attr("id", "selectionText");
+                .attr("id", "selectionText")
+                .on("click", function(d) {
+                  arrowRight();
+                });
         }
     },
     /**
