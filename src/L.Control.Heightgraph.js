@@ -62,7 +62,13 @@ L.Control.Heightgraph = L.Control.extend({
                 .remove();
         }
         this._data = data;
-        const selection = this._selectedOption;
+        let selection = this._selectedOption;
+        if(selection==undefined){
+          if (BR.Util.localStorageAvailable()) {
+            selection = parseInt(localStorage.getItem('map/heightgraphProfile'));
+            selection = isNaN(selection)?0:selection;
+          }
+        }
         this._selection();
         this._prepareData();
         this._computeStats();
@@ -202,6 +208,9 @@ L.Control.Heightgraph = L.Control.extend({
                     .remove();
                 this._removeMarkedSegmentsOnMap();
                 this._createChart(selectedOption);
+            }
+            if (BR.Util.localStorageAvailable()) {
+              localStorage.setItem('map/heightgraphProfile', selectedOption);
             }
         }
     },
